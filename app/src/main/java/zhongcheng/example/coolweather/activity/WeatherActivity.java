@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import zhongcheng.example.coolweather.R;
+import zhongcheng.example.coolweather.service.AutoUpdateService;
 import zhongcheng.example.coolweather.util.HttpCallbackListener;
 import zhongcheng.example.coolweather.util.HttpUtil;
 import zhongcheng.example.coolweather.util.Utility;
@@ -115,7 +116,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
     private void showWeather() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         cityNameText.setText(prefs.getString("city_name", ""));
-        Log.i("WeatherActivity",prefs.getString("city_name",""));
+        Log.i("WeatherActivity", prefs.getString("city_name", ""));
         temp1Text.setText(prefs.getString("temp1", ""));
         temp2Text.setText(prefs.getString("temp2", ""));
         weatherDespText.setText(prefs.getString("weather_desp", ""));
@@ -123,6 +124,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         currentDateText.setText(prefs.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        Intent intent=new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     @Override
